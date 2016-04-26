@@ -25,7 +25,7 @@ public class Ludo implements Game {
         int target;
         int diversion;
         Color color;
-        Zone Zone;
+        Zone zone;
 
         Puck (Color color) {
             int position = -1, target = 57;
@@ -43,7 +43,7 @@ public class Ludo implements Game {
                     setAttributes(position, target);
             }
             this.color = color;
-            this.Zone = Zone.HOME;
+            this.zone = Zone.HOME;
         }
 
         private void setAttributes (int position, int target) {
@@ -55,7 +55,7 @@ public class Ludo implements Game {
 
         void sendHome () {
             this.position = start - 1;
-            this.Zone = Zone.HOME;
+            this.zone = Zone.HOME;
         }
 
         public String toString () {
@@ -76,16 +76,16 @@ public class Ludo implements Game {
     private int nextCell (Puck puck) {
         int cell = puck.position;
         if (cell == puck.diversion) {
-            puck.Zone = Zone.SAFE;
+            puck.zone = Zone.SAFE;
             return board[cell];
         }
         else if (cell == puck.target - 1)
             return puck.target;
         else if (cell == puck.start) {
-            puck.Zone = Zone.WILD;
+            puck.zone = Zone.WILD;
             return cell + 1;
         }
-        else if (puck.Zone == Zone.SAFE)
+        else if (puck.zone == Zone.SAFE)
             return cell + 1;
         else
             return cell < 51 ? cell + 1 : 0;
@@ -128,7 +128,7 @@ public class Ludo implements Game {
     private Puck getPuckAtCurrent (Puck puck) {
         Puck curr = null;
         List<Puck> opponents = Arrays.asList(this.pucks).stream().filter(
-                p -> p.Zone == Zone.WILD && p.color != puck.color && p.position == puck.position
+                p -> p.zone == Zone.WILD && p.color != puck.color && p.position == puck.position
         ).collect(Collectors.toList());
 
         if (opponents.size() > 0)
@@ -155,11 +155,11 @@ public class Ludo implements Game {
         List<Puck> pucksHWSC = Arrays.asList(this.pucks);
 
         List<Puck> pucksH = pucksHWSC.stream().filter(
-                p -> (p != null) && player.getName().equalsIgnoreCase(p.color.name()) && p.Zone == Zone.HOME
+                p -> (p != null) && player.getName().equalsIgnoreCase(p.color.name()) && p.zone == Zone.HOME
         ).collect(Collectors.toList());
 
         List<Puck> pucksWS = pucksHWSC.stream().filter(
-                p -> (p != null) && player.getName().equalsIgnoreCase(p.color.name()) && (p.Zone == Zone.WILD || p.Zone == Zone.SAFE)
+                p -> (p != null) && player.getName().equalsIgnoreCase(p.color.name()) && (p.zone == Zone.WILD || p.zone == Zone.SAFE)
         ).collect(Collectors.toList());
 
         Puck curr = null;
@@ -205,18 +205,18 @@ public class Ludo implements Game {
     }
 
     boolean turn (Puck puck, Player player, int dice) {
-        if (puck.Zone == Zone.HOME && dice == 6) {
-            puck.Zone = Zone.SAFE;
+        if (puck.zone == Zone.HOME && dice == 6) {
+            puck.zone = Zone.SAFE;
             puck.position = puck.start;
             showPlayerPosition(player);
             return false;
         }
 
-        if (puck.Zone != Zone.HOME && dice + puck.position <= puck.target) {
+        if (puck.zone != Zone.HOME && dice + puck.position <= puck.target) {
             while (dice > 0) {
                 puck.position = nextCell(puck);
                 if (isWinner(player)) {
-                    puck.Zone = Zone.CENTER;
+                    puck.zone = Zone.CENTER;
                     showPlayerPosition(player);
                     return true;
                 }
