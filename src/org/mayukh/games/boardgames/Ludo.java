@@ -6,7 +6,9 @@ import java.util.Random;
 import java.util.stream.Collectors;
 
 /**
- * Created by mamukhop on 4/26/2016.
+ * Created by mayukh42 on 4/26/2016.
+ * https://github.com/mayukh42/java-games
+ *
  * Implementation of the Ludo board game (https://en.wikipedia.org/wiki/Ludo_(board_game))
  * 2, 3, 4 players can play - game stops when any one player wins
  * If a puck meets opponent's puck while in the wild (i.e. not in safe zone), then the opponent's puck is sent home
@@ -105,7 +107,6 @@ public class Ludo implements Game {
                 break;
             default:
                 code = 0;
-                break;
         }
         return code;
     }
@@ -224,7 +225,7 @@ public class Ludo implements Game {
             }
             Puck other = getPuckAtCurrent(puck);
             if (other != null) {
-                System.out.print(" opponent found! (" + other + ") ");
+                System.out.print(" \n\tOpponent found! (" + other + ") is sent home. ");
                 other.sendHome();
             }
         }

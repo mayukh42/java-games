@@ -3,7 +3,8 @@ package org.mayukh.games.boardgames;
 import java.util.Random;
 
 /**
- * Created by mamukhop on 4/26/2016.
+ * Created by mayukh42 on 4/26/2016.
+ * https://github.com/mayukh42/java-games
  */
 public class SnakesLadders implements Game {
 
