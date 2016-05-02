@@ -9,7 +9,15 @@ public class RunGame {
     public static void main(String[] args) {
         // playSnakesLadders();
         // playLudo();
-        playMinesweeper();
+        // playMinesweeper();
+        playTicTacToe();
+    }
+
+    private static void playTicTacToe () {
+        Game game = new TicTacToe();
+        game.build();
+        game.draw();
+        game.play();
     }
 
     private static void playMinesweeper () {

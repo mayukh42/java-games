@@ -82,10 +82,10 @@ public class Minesweeper implements Game {
         return list;
     }
 
-    private void printBoard () {
+    private void printBoard (boolean mines) {
         for (int i = 0; i < this.y; i++) {
             for (int j = 0; j < this.x; j++)
-                System.out.format("%6d", board[i * this.x + j]);
+                System.out.format("%6d", mines ? board[i * this.x + j] : i * this.x + j);
             System.out.println();
         }
     }
@@ -114,7 +114,7 @@ public class Minesweeper implements Game {
 
     @Override
     public void draw() {
-        printBoard();
+        printBoard(false);
     }
 
     @Override
