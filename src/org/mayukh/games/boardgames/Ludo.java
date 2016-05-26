@@ -1,5 +1,9 @@
 package org.mayukh.games.boardgames;
 
+import org.mayukh.games.api.Color;
+import org.mayukh.games.api.Game;
+import org.mayukh.games.api.Player;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
